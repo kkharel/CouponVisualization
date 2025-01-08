@@ -1,14 +1,17 @@
-# CouponVisualization 
-
-Will the Customer Accept the Coupon?
+# Will the Customer Accept the Coupon?
 
 
 Note: Since the github does not display plotly graphs, I have used NBViewer for the charts and graphs. Here is the link to the notebook:
+
 [https://nbviewer.org/github/kkharel/CouponVisualization/blob/main/.ipynb_checkpoints/Coupon%20Analysis-checkpoint.ipynb]
 
+Notebook file contains the detailed analysis and I will be highlighting only some of the findings here. 
 
-Summary:
+Univariate analysis looks at the individual features and calculates the acceptance, rejection and relative rate without taking into account other features in the dataset. Along with univariate analysis, we further segment the analysis by coupon type. Then, we look at top 10% of customers by number of coupons sent and their contextual and user attributes. Next, we dive deeper into coffee house coupons to find patterns and the characteristics of customers who accepts and rejects the coupon. 
 
+## Summary
+
+### Overall
 Customers accepted 56.8%of coupons and rejected 43.2% of coupons that were sent to them. The net success rate of coupons is 13.68%.
 
 The net success rate (also known as relative rate) is calcuated as,
@@ -23,9 +26,7 @@ If the relative rate is close to 1, it tells us that almost all coupons were acc
 
 The formula mentioned above provides insight into the balance between acceptance and rejection rates in relation to total count, giving a normalized measure of preference or net success rate for coupons.
 
-Notebook file contains the detailed analysis and I will be highlighting only some of the findings here. 
-
-Univariate analysis looks at the individual features and calculates the acceptance, rejection and relative rate without taking into account other features in the dataset. Along with univariate analysis, we further segment the analysis by coupon type. Then, we look at top 10% of customers by number of coupons sent and their contextual and user attributes. Next, we dive deeper into coffee house coupons to find patterns and the characteristics of customers who accepts and rejects the coupon. 
+### Context Attributes
 
 By analysis context features, we found the following insigts:
 
@@ -66,6 +67,9 @@ The context of top 10% of customers who rejected more coupons than accepted are.
 
 
 We divided user attributed in two parts and analyzed them separately.
+
+### User Attributes 1
+
 By analyzing the first User Attributes (Education, Occupation Group, Income Group, Coupon). The following insights were extracted for top 10% of users who received the coupon.
 
 The top 10% of customers contributed 40.38 percent of total coupons
@@ -113,6 +117,8 @@ The customer attributes of top 10% of customers who rejected more coupons than a
 | 22    | Bachelors degree                  | white collar     | middle income      | Restaurant(20-50)  |
 | 28    | Bachelors degree                  | white collar     | low income         | Bar                |
 
+
+### User Attributes 2
 
 We further looked into second user attributes (Gender, Age Group, Marital Status) and found the following for top 10% of users.
 
@@ -162,6 +168,9 @@ The customer attributes of top 10% of customers who rejected more coupons than a
 | 26    | Female | 21 to 30   | Married partner      | 0            | Coffee House  |
 | 28    | Male   | 41 to 50   | Married partner      | 1            | Coffee House  |
 
+
+### Coffee House Coupons Summary
+
 Then, we decided to drill down into coffee house coupon and look at various combination and permutation of feature and its values and derived the following insights.
 
 We have compared only few of the features with each other for coffee house coupons. There can be many permutations and combinations of feaures and its values and it is not optimal for us to evaluate all of these. I only looked at few of the features to hypothesize about the customers who were sent the coffee house coupons. I evaluated these customers based on nunmber of visits and grouped them based on whether they rejected more coupons than accepted or accepted more coupons than rejected and again compared them along with other features. Below are the insights that were drawn from the above analysis.
@@ -180,5 +189,5 @@ We further drilled down on income analysis along with the customer destination t
 
 From univariate analysis, we also found that customer that are in accepted more than rejected group for coffee house visits also accepted more coupons than rejected for expensive restaurants. For this analysis, we did not include all the visits that results in more accpeted coupons than rejected for expensive restaurants. We only looked at customers who visited expensive restaurant more than eight times a month and white collar occupation against all others. We found that the acceptance rate of customers who accepted more coupon than rejected, visits expensive restaurant more than 8 times a month and does white collar job is ≈74% but the number of coupons sent to these customers are low compared to other groups. When the customer does not visit expensive restaurant more than 8 times a month and does white collar job for accepted more than rejected group, we found their acceptance rate of coupon to be ≈62%. Customers who accepted more coupon than rejected, visits expensive restaurant more than 8 times a month and is not from white collar job has the acceptance rate of ≈39% . The acceptance rate of Customers who accepted more coupon than rejected, does not visit expensive restaurant more than 8 times a month and is not from white collar job is ≈72%. We also found that we do not have customers who rejected more coupons than accepted, visit expensive restaurant more than 8 times a month and is from white collar job group.
 
-** Next Steps:
+### Next Steps
 Since there are many combinations and permutations of unique values of features, we cannot possibly visualize everything to derive insights into customer characteristics. The visualization can provide a guide towards more mathematical approach of machine learning. For next steps, we can build the classification model for this given problem to predict whether the customer accepts the coupon or not? However, machine learning model needs massive amount of data to make correct prediction, this alone might not be a good solution. We can explore some sampling techniques or create more synthetic dataset to train the machine learning model and compare the results between various models and pick the one that best predicts the behavior of the customer.
