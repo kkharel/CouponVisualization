@@ -12,15 +12,14 @@ Summary:
 Customers accepted 56.8%of coupons and rejected 43.2% of coupons that were sent to them. The net success rate of coupons is 13.68%.
 
 The net success rate (also known as relative rate) is calcuated as,
-$$
-\frac{\text{accepted_count} - \text{rejected_count}}{\text{total_count}}
-$$
 
-Net Difference ($\text{accepted_count} - \text{rejected_count}$) measures the net difference between the number of accepted coupons and rejected coupons by users. If the result is positive, it means there are more accepted coupons than rejected coupons. If it's negative then there are more rejected coupons than accepted coupons.
+(accepted_count - rejected_count) / total_count
 
-By dividing the net difference by $\text{total_count}$ or total number of coupons, we are normalizing the value which makes it a proportion rather than an absolute value. This will help us compare the results across different groups where the total count may vary.
+Net Difference (accepted_count - rejected_count) measures the net difference between the number of accepted coupons and rejected coupons by users. If the result is positive, it means there are more accepted coupons than rejected coupons. If it's negative then there are more rejected coupons than accepted coupons.
 
-If the relative rate is close to $1$, it tells us that almost all coupons were accepted. If the relative rate is close to $-1$, it tells us almost all coupons were rejected. If the value is around $0$ then the number of accepted coupons and rejected coupons are roughly equal.
+By dividing the net difference by total_count or total number of coupons, we are normalizing the value which makes it a proportion rather than an absolute value. This will help us compare the results across different groups where the total count may vary.
+
+If the relative rate is close to 1, it tells us that almost all coupons were accepted. If the relative rate is close to -1, it tells us almost all coupons were rejected. If the value is around 0 then the number of accepted coupons and rejected coupons are roughly equal.
 
 The formula mentioned above provides insight into the balance between acceptance and rejection rates in relation to total count, giving a normalized measure of preference or net success rate for coupons.
 
@@ -38,29 +37,32 @@ The top 10% of customers who accepted more coupons than rejected contributed 26.
 
 The context of top 10% of customers who accepted more coupons than rejected are...
 
-                   coupon      destination weather  temperature  time  passenger  direction_same
-1            Coffee House  No Urgent Place   Sunny           80   2PM  Friend(s)               0
-3         Restaurant(<20)  No Urgent Place   Sunny           80   6PM  Friend(s)               0
-4            Coffee House             Work   Sunny           80   7AM      Alone               1
-5   Carry out & Take away             Work   Sunny           80   7AM      Alone               1
-6            Coffee House  No Urgent Place   Sunny           80  10AM  Friend(s)               0
-9         Restaurant(<20)             Home   Sunny           80   6PM      Alone               1
-10           Coffee House  No Urgent Place   Sunny           80  10AM      Alone               0
-11           Coffee House  No Urgent Place   Sunny           55   2PM  Friend(s)               0
-12        Restaurant(<20)  No Urgent Place   Sunny           80   2PM  Friend(s)               0
-14                    Bar             Home   Sunny           55   6PM      Alone               1
-15        Restaurant(<20)  No Urgent Place   Sunny           55   2PM      Alone               0
-16  Carry out & Take away  No Urgent Place   Sunny           80  10AM  Friend(s)               0
-17  Carry out & Take away  No Urgent Place   Sunny           55   2PM  Friend(s)               0
+| Index | Coupon              | Destination       | Weather | Temperature | Time | Passenger   | Direction Same |
+|-------|---------------------|-------------------|---------|-------------|------|-------------|----------------|
+| 1     | Coffee House        | No Urgent Place   | Sunny   | 80          | 2PM  | Friend(s)   | 0              |
+| 3     | Restaurant(<20)     | No Urgent Place   | Sunny   | 80          | 6PM  | Friend(s)   | 0              |
+| 4     | Coffee House        | Work              | Sunny   | 80          | 7AM  | Alone       | 1              |
+| 5     | Carry out & Take away | Work            | Sunny   | 80          | 7AM  | Alone       | 1              |
+| 6     | Coffee House        | No Urgent Place   | Sunny   | 80          | 10AM | Friend(s)   | 0              |
+| 9     | Restaurant(<20)     | Home              | Sunny   | 80          | 6PM  | Alone       | 1              |
+| 10    | Coffee House        | No Urgent Place   | Sunny   | 80          | 10AM | Alone       | 0              |
+| 11    | Coffee House        | No Urgent Place   | Sunny   | 55          | 2PM  | Friend(s)   | 0              |
+| 12    | Restaurant(<20)     | No Urgent Place   | Sunny   | 80          | 2PM  | Friend(s)   | 0              |
+| 14    | Bar                 | Home              | Sunny   | 55          | 6PM  | Alone       | 1              |
+| 15    | Restaurant(<20)     | No Urgent Place   | Sunny   | 55          | 2PM  | Alone       | 0              |
+| 16    | Carry out & Take away | No Urgent Place | Sunny   | 80          | 10AM | Friend(s)   | 0              |
+| 17    | Carry out & Take away | No Urgent Place | Sunny   | 55          | 2PM  | Friend(s)   | 0              |
+
 
 The context of top 10% of customers who rejected more coupons than accepted are...
 
-               coupon destination weather  temperature time passenger  direction_same
-0        Coffee House        Work   Sunny           55  7AM     Alone               0
-2        Coffee House        Home   Sunny           80  6PM     Alone               0
-7   Restaurant(20-50)        Work   Sunny           80  7AM     Alone               0
-8   Restaurant(20-50)        Home   Sunny           55  6PM     Alone               0
-13                Bar        Work   Sunny           55  7AM     Alone               0
+| Index | Coupon              | Destination | Weather | Temperature | Time | Passenger | Direction Same |
+|-------|---------------------|-------------|---------|-------------|------|-----------|----------------|
+| 0     | Coffee House        | Work        | Sunny   | 55          | 7AM  | Alone     | 0              |
+| 2     | Coffee House        | Home        | Sunny   | 80          | 6PM  | Alone     | 0              |
+| 7     | Restaurant(20-50)   | Work        | Sunny   | 80          | 7AM  | Alone     | 0              |
+| 8     | Restaurant(20-50)   | Home        | Sunny   | 55          | 6PM  | Alone     | 0              |
+| 13    | Bar                 | Work        | Sunny   | 55          | 7AM  | Alone     | 0              |
 
 
 We divided user attributed in two parts and analyzed them separately.
@@ -74,39 +76,43 @@ The top 10% of customers who accepted more coupons than rejected contributed 25.
 
 The customer attributes of top 10% of customers who accepted more coupons than rejected are...
 
-                                 education occupation_group         income_group                 coupon
-2                 Some college - no degree            other           low income           Coffee House
-3                         Bachelors degree     white collar           low income           Coffee House
-4                 Some college - no degree     white collar        middle income           Coffee House
-5                         Bachelors degree     white collar        middle income        Restaurant(<20)
-7                         Bachelors degree     white collar        middle income  Carry out & Take away
-8                 Some college - no degree            other           low income        Restaurant(<20)
-10                Some college - no degree     white collar           low income        Restaurant(<20)
-11                Some college - no degree     white collar        middle income        Restaurant(<20)
-15                        Bachelors degree     white collar           low income        Restaurant(<20)
-16                Some college - no degree            other           low income  Carry out & Take away
-18                Some college - no degree     white collar        middle income  Carry out & Take away
-19                Some college - no degree     white collar           low income  Carry out & Take away
-20                        Bachelors degree     white collar  upper middle income        Restaurant(<20)
-21                        Bachelors degree     white collar           low income  Carry out & Take away
-23                Some college - no degree            other        middle income           Coffee House
-24  Graduate degree (Masters or Doctorate)     white collar        middle income        Restaurant(<20)
-25                Some college - no degree      blue collar           low income        Restaurant(<20)
-26                        Bachelors degree            other        middle income           Coffee House
+| Index | Education                          | Occupation Group | Income Group       | Coupon                  |
+|-------|------------------------------------|------------------|--------------------|-------------------------|
+| 2     | Some college - no degree          | other            | low income         | Coffee House            |
+| 3     | Bachelors degree                  | white collar     | low income         | Coffee House            |
+| 4     | Some college - no degree          | white collar     | middle income      | Coffee House            |
+| 5     | Bachelors degree                  | white collar     | middle income      | Restaurant(<20)         |
+| 7     | Bachelors degree                  | white collar     | middle income      | Carry out & Take away   |
+| 8     | Some college - no degree          | other            | low income         | Restaurant(<20)         |
+| 10    | Some college - no degree          | white collar     | low income         | Restaurant(<20)         |
+| 11    | Some college - no degree          | white collar     | middle income      | Restaurant(<20)         |
+| 15    | Bachelors degree                  | white collar     | low income         | Restaurant(<20)         |
+| 16    | Some college - no degree          | other            | low income         | Carry out & Take away   |
+| 18    | Some college - no degree          | white collar     | middle income      | Carry out & Take away   |
+| 19    | Some college - no degree          | white collar     | low income         | Carry out & Take away   |
+| 20    | Bachelors degree                  | white collar     | upper middle income| Restaurant(<20)         |
+| 21    | Bachelors degree                  | white collar     | low income         | Carry out & Take away   |
+| 23    | Some college - no degree          | other            | middle income      | Coffee House            |
+| 24    | Graduate degree (Masters or Doctorate) | white collar | middle income      | Restaurant(<20)         |
+| 25    | Some college - no degree          | blue collar      | low income         | Restaurant(<20)         |
+| 26    | Bachelors degree                  | other            | middle income      | Coffee House            |
+
 
 The customer attributes of top 10% of customers who rejected more coupons than accepted are...
 
-                                 education occupation_group         income_group             coupon
-0                         Bachelors degree     white collar        middle income       Coffee House
-1                 Some college - no degree     white collar           low income       Coffee House
-6   Graduate degree (Masters or Doctorate)     white collar        middle income       Coffee House
-9                         Bachelors degree     white collar  upper middle income       Coffee House
-12                        Bachelors degree     white collar        middle income                Bar
-13                Some college - no degree      blue collar           low income       Coffee House
-14                        Bachelors degree     white collar          high income       Coffee House
-17                Some college - no degree            other           low income                Bar
-22                        Bachelors degree     white collar        middle income  Restaurant(20-50)
-28                        Bachelors degree     white collar           low income                Bar
+| Index | Education                          | Occupation Group | Income Group       | Coupon             |
+|-------|------------------------------------|------------------|--------------------|--------------------|
+| 0     | Bachelors degree                  | white collar     | middle income      | Coffee House       |
+| 1     | Some college - no degree          | white collar     | low income         | Coffee House       |
+| 6     | Graduate degree (Masters or Doctorate) | white collar | middle income      | Coffee House       |
+| 9     | Bachelors degree                  | white collar     | upper middle income| Coffee House       |
+| 12    | Bachelors degree                  | white collar     | middle income      | Bar                |
+| 13    | Some college - no degree          | blue collar      | low income         | Coffee House       |
+| 14    | Bachelors degree                  | white collar     | high income        | Coffee House       |
+| 17    | Some college - no degree          | other            | low income         | Bar                |
+| 22    | Bachelors degree                  | white collar     | middle income      | Restaurant(20-50)  |
+| 28    | Bachelors degree                  | white collar     | low income         | Bar                |
+
 
 We further looked into second user attributes (Gender, Age Group, Marital Status) and found the following for top 10% of users.
 
@@ -118,41 +124,43 @@ The top 10% of customers who accepted more coupons than rejected contributed 32.
 
 The customer attributes of top 10% of customers who accepted more coupons than rejected are...
 
-    gender age_group      maritalStatus  has_children                 coupon
-0     Male  21 to 30             Single             0           Coffee House
-1     Male  21 to 30             Single             0        Restaurant(<20)
-2   Female  21 to 30             Single             0           Coffee House
-3     Male  21 to 30             Single             0  Carry out & Take away
-4     Male  21 to 30             Single             0                    Bar
-5   Female  21 to 30  Unmarried partner             0           Coffee House
-6     Male  21 to 30             Single             0      Restaurant(20-50)
-7   Female  31 to 40    Married partner             1           Coffee House
-8   Female  21 to 30             Single             0        Restaurant(<20)
-11  Female  21 to 30             Single             0  Carry out & Take away
-13  Female  21 to 30  Unmarried partner             0        Restaurant(<20)
-15  Female  31 to 40    Married partner             1        Restaurant(<20)
-16  Female  21 to 30    Married partner             1           Coffee House
-17    Male  31 to 40    Married partner             1        Restaurant(<20)
-18  Female  41 to 50    Married partner             1        Restaurant(<20)
-19    Male  31 to 40    Married partner             1  Carry out & Take away
-21  Female  21 to 30             Single             0                    Bar
-22  Female  31 to 40    Married partner             1  Carry out & Take away
-24  Female  21 to 30  Unmarried partner             0  Carry out & Take away
-27    Male  31 to 40    Married partner             0           Coffee House
-29  Female  41 to 50    Married partner             1  Carry out & Take away
+| Index | Gender | Age Group  | Marital Status       | Has Children | Coupon                 |
+|-------|--------|------------|----------------------|--------------|------------------------|
+| 0     | Male   | 21 to 30   | Single               | 0            | Coffee House           |
+| 1     | Male   | 21 to 30   | Single               | 0            | Restaurant(<20)        |
+| 2     | Female | 21 to 30   | Single               | 0            | Coffee House           |
+| 3     | Male   | 21 to 30   | Single               | 0            | Carry out & Take away  |
+| 4     | Male   | 21 to 30   | Single               | 0            | Bar                    |
+| 5     | Female | 21 to 30   | Unmarried partner    | 0            | Coffee House           |
+| 6     | Male   | 21 to 30   | Single               | 0            | Restaurant(20-50)      |
+| 7     | Female | 31 to 40   | Married partner      | 1            | Coffee House           |
+| 8     | Female | 21 to 30   | Single               | 0            | Restaurant(<20)        |
+| 11    | Female | 21 to 30   | Single               | 0            | Carry out & Take away  |
+| 13    | Female | 21 to 30   | Unmarried partner    | 0            | Restaurant(<20)        |
+| 15    | Female | 31 to 40   | Married partner      | 1            | Restaurant(<20)        |
+| 16    | Female | 21 to 30   | Married partner      | 1            | Coffee House           |
+| 17    | Male   | 31 to 40   | Married partner      | 1            | Restaurant(<20)        |
+| 18    | Female | 41 to 50   | Married partner      | 1            | Restaurant(<20)        |
+| 19    | Male   | 31 to 40   | Married partner      | 1            | Carry out & Take away  |
+| 21    | Female | 21 to 30   | Single               | 0            | Bar                    |
+| 22    | Female | 31 to 40   | Married partner      | 1            | Carry out & Take away  |
+| 24    | Female | 21 to 30   | Unmarried partner    | 0            | Carry out & Take away  |
+| 27    | Male   | 31 to 40   | Married partner      | 0            | Coffee House           |
+| 29    | Female | 41 to 50   | Married partner      | 1            | Carry out & Take away  |
 
 The customer attributes of top 10% of customers who rejected more coupons than accepted are...
 
-    gender age_group      maritalStatus  has_children        coupon
-9     Male  31 to 40    Married partner             1  Coffee House
-10    Male  21 to 30  Unmarried partner             0  Coffee House
-12  Female  41 to 50    Married partner             1  Coffee House
-14    Male  31 to 40             Single             0  Coffee House
-20  Female  21 to 30  Unmarried partner             0           Bar
-23  Female  above 50    Married partner             1  Coffee House
-25    Male  31 to 40    Married partner             1           Bar
-26  Female  21 to 30    Married partner             0  Coffee House
-28    Male  41 to 50    Married partner             1  Coffee House
+| Index | Gender | Age Group  | Marital Status       | Has Children | Coupon        |
+|-------|--------|------------|----------------------|--------------|---------------|
+| 9     | Male   | 31 to 40   | Married partner      | 1            | Coffee House  |
+| 10    | Male   | 21 to 30   | Unmarried partner    | 0            | Coffee House  |
+| 12    | Female | 41 to 50   | Married partner      | 1            | Coffee House  |
+| 14    | Male   | 31 to 40   | Single               | 0            | Coffee House  |
+| 20    | Female | 21 to 30   | Unmarried partner    | 0            | Bar           |
+| 23    | Female | Above 50   | Married partner      | 1            | Coffee House  |
+| 25    | Male   | 31 to 40   | Married partner      | 1            | Bar           |
+| 26    | Female | 21 to 30   | Married partner      | 0            | Coffee House  |
+| 28    | Male   | 41 to 50   | Married partner      | 1            | Coffee House  |
 
 Then, we decided to drill down into coffee house coupon and look at various combination and permutation of feature and its values and derived the following insights.
 
